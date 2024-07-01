@@ -28,12 +28,14 @@ export type CreateRoutineConfigOneBody = Pick<
 export type CreateRoutineConfigOneRequest = CreateRoutineConfigOneHeader &
     CreateRoutineConfigOneBody;
 
+export type UpdateRoutineConfigOnePath = Pick<RoutineConfig, "routineConfigId">;
 export type UpdateRoutineConfigOneBody = Pick<
     RoutineConfig,
-    "routineConfigId" | "routineConfigName" | "routineConfigColor"
+    "routineConfigName" | "routineConfigColor"
 >;
 export type UpdateRoutineConfigOneHeader = Pick<User, "userId">;
-export type UpdateRoutineConfigOneRequest = UpdateRoutineConfigOneHeader &
+export type UpdateRoutineConfigOneRequest = UpdateRoutineConfigOnePath &
+    UpdateRoutineConfigOneHeader &
     UpdateRoutineConfigOneBody;
 
 export type DeleteRoutineConfigOnePath = Pick<RoutineConfig, "routineConfigId">;
