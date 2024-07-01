@@ -7,25 +7,34 @@ export type RoutineConfig = {
     createdAt: Date;
     updatedAt: Date;
 } & Pick<User, "userId">;
-export type GetRoutineConfigAllRequest = Pick<User, "userId">;
 export type GetRoutineConfigAllResponse = RoutineConfig[];
-export type GetRoutineConfigOneRequest = Pick<User, "userId"> &
-    Pick<RoutineConfig, "routineConfigId">;
 export type GetRoutineConfigOneResponse = RoutineConfig;
-export type CreateRoutineConfigOneRequest = Pick<
+export type CreateRoutineConfigOneResponse = RoutineConfig;
+export type UpdateRoutineConfigOneResponse = RoutineConfig;
+export type DeleteRoutineConfigOneResponse = RoutineConfig;
+
+export type GetRoutineConfigAllHeader = Pick<User, "userId">;
+
+export type GetRoutineConfigOneHeader = Pick<User, "userId">;
+export type GetRoutineConfigOnePath = Pick<RoutineConfig, "routineConfigId">;
+export type GetRoutineconfigOneRequest = GetRoutineConfigOneHeader &
+    GetRoutineConfigOnePath;
+
+export type CreateRoutineConfigOneHeader = Pick<User, "userId">;
+export type CreateRoutineConfigOneBody = Pick<
     RoutineConfig,
     "routineConfigName" | "routineConfigColor"
-> &
-    Pick<User, "userId">;
-export type CreateRoutineConfigOneResponse = RoutineConfig;
-export type UpdateRoutineConfigOneRequest = Pick<
+>;
+export type CreateRoutineConfigOneRequest = CreateRoutineConfigOneHeader &
+    CreateRoutineConfigOneBody;
+
+export type UpdateRoutineConfigOneBody = Pick<
     RoutineConfig,
     "routineConfigId" | "routineConfigName" | "routineConfigColor"
-> &
-    Pick<User, "userId">;
-export type UpdateRoutineConfigOneResponse = RoutineConfig;
-export type DeleteRoutineConfigOneRequest = Pick<
-    RoutineConfig,
-    "routineConfigId"
 >;
-export type DeleteRoutineConfigOneResponse = RoutineConfig;
+export type UpdateRoutineConfigOneHeader = Pick<User, "userId">;
+export type UpdateRoutineConfigOneRequest = UpdateRoutineConfigOneHeader &
+    UpdateRoutineConfigOneBody;
+
+export type DeleteRoutineConfigOnePath = Pick<RoutineConfig, "routineConfigId">;
+export type DeleteRoutineConfigOneRequest = DeleteRoutineConfigOnePath;
