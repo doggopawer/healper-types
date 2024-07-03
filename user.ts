@@ -1,3 +1,8 @@
 export type User = {
-    userId: string;
+    id: number;
+    provider: string;
+    prociderId: string;
+    name: string;
+    email: string;
+    profileImage: string;
 };
