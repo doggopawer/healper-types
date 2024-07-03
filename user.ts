@@ -1,7 +1,7 @@
 export type User = {
     id: number;
     provider: string;
-    prociderId: string;
+    providerId: string;
     name: string;
     email: string;
     profileImage: string;
