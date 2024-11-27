@@ -28,7 +28,12 @@ export const ErrorDefinitions: Record<string, ErrorDefinition> = {
     NETWORK_ERROR: {
         code: "NETWORK_ERROR",
         message: "네트워크 연결에 문제가 발생했습니다.",
-        status: 500, // 일반적인 서버 오류
+        status: 500,
+    },
+    AXIOS_ERROR: {
+        code: "AXIOS_ERROR",
+        message: "API 요청에 실패 했습니다.",
+        status: 500,
     },
     FETCH_FAILED: {
         code: "FETCH_FAILED",
@@ -45,6 +50,16 @@ export const ErrorDefinitions: Record<string, ErrorDefinition> = {
         message: "리소스 업데이트에 실패했습니다.",
         status: 500, // 서버 오류
     },
+    DB_ERROR: {
+        code: "DB_ERROR",
+        message: "데이터베이스 에러가 발생했습니다.",
+        status: 500, // 서버 오류
+    },
+    SERVER_ERROR: {
+        code: "UPDATE_FAILED",
+        message: "서버 에러가 발생했습니다.",
+        status: 500, // 서버 오류
+    },
     SESSION_EXPIRED: {
         code: "SESSION_EXPIRED",
         message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
@@ -57,8 +72,8 @@ export class CustomError extends Error {
     public status: number; // HTTP 상태 코드 추가
     public timestamp: Date;
 
-    constructor(errorKey: keyof typeof ErrorDefinitions) {
-        const errorDefinition: ErrorDefinition = ErrorDefinitions[errorKey] || {
+    constructor(errorDefinition: ErrorDefinition) {
+        const error: ErrorDefinition = errorDefinition || {
             code: "UNKNOWN_ERROR",
             message: "알 수 없는 오류가 발생했습니다.",
             status: 500, // 기본 상태 코드
@@ -66,8 +81,9 @@ export class CustomError extends Error {
 
         super(errorDefinition.message);
         this.name = this.constructor.name; // 에러 클래스 이름
-        this.code = errorDefinition.code; // 에러 코드
-        this.status = errorDefinition.status; // 에러 상태 코드
+        this.code = error.code; // 에러 코드
+        this.message = error.message; // 에러 메시지
+        this.status = error.status; // 에러 상태 코드
         this.timestamp = new Date(); // 에러 발생 시간
     }
 }
